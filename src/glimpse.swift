@@ -340,6 +340,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, WKNavigationDelegate, WKScri
     }
 
     func applicationDidFinishLaunching(_ notification: Notification) {
+        buildMenuBar()
         if config.statusItem {
             setupStatusItem()
         } else {
@@ -442,6 +443,32 @@ class AppDelegate: NSObject, NSApplicationDelegate, WKNavigationDelegate, WKScri
 
         // Load blank page so didFinish fires and we emit "ready"
         webView.loadHTMLString("<html><body></body></html>", baseURL: nil)
+    }
+
+    // MARK: - Menu Bar
+
+    private func buildMenuBar() {
+        let mainMenu = NSMenu()
+
+        // App menu (Glimpse)
+        let appMenu = NSMenu(title: config.title)
+        let quitItem = NSMenuItem(title: "Quit \(config.title)", action: #selector(NSApp.terminate(_:)), keyEquivalent: "q")
+        appMenu.addItem(quitItem)
+        let appMenuItem = NSMenuItem()
+        appMenuItem.submenu = appMenu
+        mainMenu.addItem(appMenuItem)
+
+        // Edit menu
+        let editMenu = NSMenu(title: "Edit")
+        editMenu.addItem(NSMenuItem(title: "Cut", action: #selector(NSText.cut(_:)), keyEquivalent: "x"))
+        editMenu.addItem(NSMenuItem(title: "Copy", action: #selector(NSText.copy(_:)), keyEquivalent: "c"))
+        editMenu.addItem(NSMenuItem(title: "Paste", action: #selector(NSText.paste(_:)), keyEquivalent: "v"))
+        editMenu.addItem(NSMenuItem(title: "Select All", action: #selector(NSText.selectAll(_:)), keyEquivalent: "a"))
+        let editMenuItem = NSMenuItem()
+        editMenuItem.submenu = editMenu
+        mainMenu.addItem(editMenuItem)
+
+        NSApp.mainMenu = mainMenu
     }
 
     // MARK: - Status Item

@@ -19,6 +19,9 @@ for (let i = 0; i < args.length; i++) {
   else if (arg === '--click-through') { flags.clickThrough = true; }
   else if (arg === '--follow-cursor') { flags.followCursor = true; }
   else if (arg === '--auto-close') { flags.autoClose = true; }
+  else if (arg === '--no-dock') { flags.noDock = true; }
+  else if (arg === '--hidden') { flags.hidden = true; }
+  else if (arg === '--status-item') { flags.statusItem = true; }
   else if (arg === '--width' && args[i + 1]) { flags.width = parseInt(args[++i]); }
   else if (arg === '--height' && args[i + 1]) { flags.height = parseInt(args[++i]); }
   else if (arg === '--title' && args[i + 1]) { flags.title = args[++i]; }
@@ -59,6 +62,9 @@ Options:
   --open-links          Open http/https links in default browser
   --open-links-app <app> Open http/https links in a specific browser app (full path)
   --auto-close         Close after first window.glimpse.send()
+  --no-dock           Hide from dock (window still visible)
+  --hidden            Start with window hidden
+  --status-item       Show menu bar status item
   --x <n>              Window X position
   --y <n>              Window Y position
   --demo               Show a demo window

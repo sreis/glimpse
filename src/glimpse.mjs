@@ -221,6 +221,7 @@ export function open(html, options = {}) {
   if (options.clickThrough) args.push('--click-through');
   if (options.noDock)       args.push('--no-dock');
   if (options.hidden)       args.push('--hidden');
+  if (options.statusItem)   args.push('--status-item');
   if (options.autoClose)    args.push('--auto-close');
 
   // macOS-only options (not yet implemented on Linux/Windows; 'override' passes through for testing)
